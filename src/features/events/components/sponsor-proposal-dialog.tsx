@@ -18,7 +18,22 @@ const TIERS = [
   { id: 'bronze', name: 'Bronze', price: '35,000' },
 ];
 
-const INITIAL_BENEFITS = [
+type BenefitValue = string | boolean;
+
+export type Benefit = {
+  id: string;
+  icon: any;
+  label: string;
+  values: {
+    platinum: BenefitValue;
+    gold: BenefitValue;
+    silver: BenefitValue;
+    bronze: BenefitValue;
+  };
+  milestoneId: string;
+};
+
+const INITIAL_BENEFITS: Benefit[] = [
   { id: '1', icon: MonitorPlay, label: 'Logo on Main Banner', values: { platinum: true, gold: true, silver: true, bronze: true }, milestoneId: 'M1' },
   { id: '2', icon: MessageSquare, label: 'Social Media Mentions', values: { platinum: '10 Posts', gold: '6 Posts', silver: '3 Posts', bronze: '1 Post' }, milestoneId: 'M2' },
   { id: '3', icon: Tent, label: 'Booth Space', values: { platinum: 'Premium (6x6m)', gold: 'Standard (3x3m)', silver: 'Basic (2x2m)', bronze: 'Shared' }, milestoneId: 'M1' },
@@ -85,7 +100,7 @@ export function SponsorProposalDialog({
     }
   };
 
-  const updateBenefitValue = (id: string, tierId: keyof typeof INITIAL_BENEFITS[0]['values'], newValue: string | boolean) => {
+  const updateBenefitValue = (id: string, tierId: keyof Benefit['values'], newValue: string | boolean) => {
     setBenefits(prev => prev.map(b => 
       b.id === id ? { ...b, values: { ...b.values, [tierId]: newValue } } : b
     ));
@@ -118,7 +133,7 @@ export function SponsorProposalDialog({
     }]);
   };
 
-  const renderValue = (benefit: typeof INITIAL_BENEFITS[0], tierId: keyof typeof INITIAL_BENEFITS[0]['values']) => {
+  const renderValue = (benefit: Benefit, tierId: keyof Benefit['values']) => {
     const val = benefit.values[tierId as keyof typeof benefit.values];
     const isSelected = selectedTier === tierId;
 

@@ -1,4 +1,4 @@
-import { IconCheck, IconFileSignature } from '@tabler/icons-react';
+import { IconCheck, IconSignature } from '@tabler/icons-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from '@tanstack/react-router';
 import { toast } from '@/hooks/use-toast';
@@ -57,7 +57,7 @@ export function ProposalCard() {
             onClick={handleCreateMoU} 
             className='w-full bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 text-white dark:text-slate-900 shadow-md gap-2 transition-transform hover:scale-[1.02]'
           >
-            <IconFileSignature size={18} />
+            <IconSignature size={18} />
             Accept Proposal & Create MoU
           </Button>
         </div>
