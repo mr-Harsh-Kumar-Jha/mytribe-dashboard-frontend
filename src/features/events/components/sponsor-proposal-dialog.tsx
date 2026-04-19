@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useNavigate } from '@tanstack/react-router';
 import { toast } from '@/hooks/use-toast';
-import { CheckCircle2, ShieldCheck, MonitorPlay, MessageSquare, Tent, Mic2, Database, Ticket, Flag, FileText, MapPin, Trash2, Plus, GripVertical } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, MonitorPlay, MessageSquare, Tent, Mic2, Database, Ticket, Flag, FileText, MapPin, Trash2, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const TIERS = [
@@ -85,7 +85,7 @@ export function SponsorProposalDialog({
     }
   };
 
-  const updateBenefitValue = (id: string, tierId: string, newValue: string | boolean) => {
+  const updateBenefitValue = (id: string, tierId: keyof typeof INITIAL_BENEFITS[0]['values'], newValue: string | boolean) => {
     setBenefits(prev => prev.map(b => 
       b.id === id ? { ...b, values: { ...b.values, [tierId]: newValue } } : b
     ));
@@ -118,7 +118,7 @@ export function SponsorProposalDialog({
     }]);
   };
 
-  const renderValue = (benefit: typeof INITIAL_BENEFITS[0], tierId: string) => {
+  const renderValue = (benefit: typeof INITIAL_BENEFITS[0], tierId: keyof typeof INITIAL_BENEFITS[0]['values']) => {
     const val = benefit.values[tierId as keyof typeof benefit.values];
     const isSelected = selectedTier === tierId;
 
@@ -239,7 +239,7 @@ export function SponsorProposalDialog({
                             selectedTier === tier.id ? (isEditing ? "bg-rose-100/50 dark:bg-rose-900/20" : "bg-rose-50 dark:bg-rose-950/30") : ""
                           )}
                         >
-                          {renderValue(benefit, tier.id)}
+                          {renderValue(benefit, tier.id as keyof typeof benefit.values)}
                           {selectedTier === tier.id && (
                             <div className={cn(
                               "absolute inset-x-0 border-x-2 border-rose-400 dark:border-rose-600 z-10 pointer-events-none",
