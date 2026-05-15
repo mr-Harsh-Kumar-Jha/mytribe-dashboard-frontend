@@ -54,6 +54,9 @@ const AuthenticatedEventsIndexLazyRouteImport = createFileRoute(
 const AuthenticatedChatsIndexLazyRouteImport = createFileRoute(
   '/_authenticated/chats/',
 )()
+const AuthenticatedAttendeesIndexLazyRouteImport = createFileRoute(
+  '/_authenticated/attendees/',
+)()
 const AuthenticatedAppsIndexLazyRouteImport = createFileRoute(
   '/_authenticated/apps/',
 )()
@@ -218,6 +221,14 @@ const AuthenticatedChatsIndexLazyRoute =
   } as any).lazy(() =>
     import('./routes/_authenticated/chats/index.lazy').then((d) => d.Route),
   )
+const AuthenticatedAttendeesIndexLazyRoute =
+  AuthenticatedAttendeesIndexLazyRouteImport.update({
+    id: '/attendees/',
+    path: '/attendees/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/attendees/index.lazy').then((d) => d.Route),
+  )
 const AuthenticatedAppsIndexLazyRoute =
   AuthenticatedAppsIndexLazyRouteImport.update({
     id: '/apps/',
@@ -306,6 +317,7 @@ export interface FileRoutesByFullPath {
   '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/apps/': typeof AuthenticatedAppsIndexLazyRoute
+  '/attendees/': typeof AuthenticatedAttendeesIndexLazyRoute
   '/chats/': typeof AuthenticatedChatsIndexLazyRoute
   '/events/': typeof AuthenticatedEventsIndexLazyRoute
   '/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
@@ -334,6 +346,7 @@ export interface FileRoutesByTo {
   '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/apps': typeof AuthenticatedAppsIndexLazyRoute
+  '/attendees': typeof AuthenticatedAttendeesIndexLazyRoute
   '/chats': typeof AuthenticatedChatsIndexLazyRoute
   '/events': typeof AuthenticatedEventsIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
@@ -366,6 +379,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexLazyRoute
+  '/_authenticated/attendees/': typeof AuthenticatedAttendeesIndexLazyRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexLazyRoute
   '/_authenticated/events/': typeof AuthenticatedEventsIndexLazyRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
@@ -398,6 +412,7 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/apps/'
+    | '/attendees/'
     | '/chats/'
     | '/events/'
     | '/help-center/'
@@ -426,6 +441,7 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/apps'
+    | '/attendees'
     | '/chats'
     | '/events'
     | '/help-center'
@@ -457,6 +473,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/display'
     | '/_authenticated/settings/notifications'
     | '/_authenticated/apps/'
+    | '/_authenticated/attendees/'
     | '/_authenticated/chats/'
     | '/_authenticated/events/'
     | '/_authenticated/help-center/'
@@ -629,6 +646,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedChatsIndexLazyRouteImport
       parentRoute: typeof AuthenticatedChatsRouteRoute
     }
+    '/_authenticated/attendees/': {
+      id: '/_authenticated/attendees/'
+      path: '/attendees'
+      fullPath: '/attendees/'
+      preLoaderRoute: typeof AuthenticatedAttendeesIndexLazyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/apps/': {
       id: '/_authenticated/apps/'
       path: '/apps'
@@ -737,6 +761,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedEventsEventIdRoute: typeof AuthenticatedEventsEventIdRoute
   AuthenticatedMousMouIdRoute: typeof AuthenticatedMousMouIdRoute
   AuthenticatedAppsIndexLazyRoute: typeof AuthenticatedAppsIndexLazyRoute
+  AuthenticatedAttendeesIndexLazyRoute: typeof AuthenticatedAttendeesIndexLazyRoute
   AuthenticatedEventsIndexLazyRoute: typeof AuthenticatedEventsIndexLazyRoute
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
   AuthenticatedMousIndexLazyRoute: typeof AuthenticatedMousIndexLazyRoute
@@ -752,6 +777,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedEventsEventIdRoute: AuthenticatedEventsEventIdRoute,
   AuthenticatedMousMouIdRoute: AuthenticatedMousMouIdRoute,
   AuthenticatedAppsIndexLazyRoute: AuthenticatedAppsIndexLazyRoute,
+  AuthenticatedAttendeesIndexLazyRoute: AuthenticatedAttendeesIndexLazyRoute,
   AuthenticatedEventsIndexLazyRoute: AuthenticatedEventsIndexLazyRoute,
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
   AuthenticatedMousIndexLazyRoute: AuthenticatedMousIndexLazyRoute,

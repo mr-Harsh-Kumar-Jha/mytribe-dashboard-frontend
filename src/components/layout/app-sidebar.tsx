@@ -8,21 +8,27 @@ import {
 import { NavGroup } from '@/components/layout/nav-group'
 import { NavUser } from '@/components/layout/nav-user'
 import { TeamSwitcher } from '@/components/layout/team-switcher'
-import { sidebarData } from './data/sidebar-data'
+import { RoleSwitcher } from '@/components/layout/role-switcher'
+import { getSidebarData } from './data/sidebar-data'
+import { useRoleStore } from '@/stores/roleStore'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const role = useRoleStore((s) => s.role)
+  const data = getSidebarData(role)
+
   return (
     <Sidebar collapsible='icon' variant='floating' {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={sidebarData.teams} />
+        <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
-        {sidebarData.navGroups.map((props) => (
+        {data.navGroups.map((props) => (
           <NavGroup key={props.title} {...props} />
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={sidebarData.user} />
+        <RoleSwitcher />
+        <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

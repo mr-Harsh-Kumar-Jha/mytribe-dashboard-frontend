@@ -27,28 +27,30 @@ import {
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
+import { type UserRole } from '@/stores/roleStore'
 
-export const sidebarData: SidebarData = {
+// ─── Sponsor Sidebar ───────────────────────────────────────────
+const sponsorSidebarData: SidebarData = {
   user: {
-    name: 'MyTribe Organiser',
-    email: 'eventorganiser@gmail.com',
+    name: 'MyTribe Sponsor',
+    email: 'sponsor@brandcorp.com',
     avatar: '/avatars/shadcn.jpg',
   },
   teams: [
     {
-      name: 'My Event',
+      name: 'BrandCorp',
       logo: Command,
-      plan: 'Organisation Name',
+      plan: 'Sponsor Account',
     },
     {
-      name: 'My Event 2',
+      name: 'TechCorp',
       logo: GalleryVerticalEnd,
-      plan: 'Organisation',
+      plan: 'Sponsor Account',
     },
     {
-      name: 'My Event 3',
+      name: 'StartupHub',
       logo: AudioWaveform,
-      plan: 'Organisation',
+      plan: 'Sponsor Account',
     },
   ],
   navGroups: [
@@ -61,13 +63,13 @@ export const sidebarData: SidebarData = {
           icon: IconLayoutDashboard,
         },
         {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: IconChecklist,
+          title: 'Events',
+          url: '/events',
+          icon: IconCalendar,
         },
         {
-          title: 'MoUs',
-          url: '/mous',
+          title: 'MOU Creation',
+          url: '/events',
           icon: IconSignature,
         },
         {
@@ -75,16 +77,6 @@ export const sidebarData: SidebarData = {
           url: '/chats',
           badge: '3',
           icon: IconMessages,
-        },
-        {
-          title: 'Events',
-          url: '/events',
-          icon: IconCalendar,
-        },
-        {
-          title: 'Attendees',
-          url: '/500',
-          icon: IconUsers,
         },
       ],
     },
@@ -96,25 +88,17 @@ export const sidebarData: SidebarData = {
           icon: IconChartPie3,
           items: [
             {
-              title: 'Organisation Analytics',
+              title: 'Sponsorship ROI',
               url: '/sign-in-2',
             },
             {
-              title: 'Team Analytics',
+              title: 'Brand Visibility',
               url: '/sign-in',
             },
             {
-              title: 'Social Reach',
+              title: 'Event Reach',
               url: '/sign-up',
             },
-            {
-              title: 'Paid Advertisements',
-              url: '/forgot-password',
-            },
-            // {
-            //   title: 'OTP',
-            //   url: '/otp',
-            // },
           ],
         },
         {
@@ -122,30 +106,15 @@ export const sidebarData: SidebarData = {
           icon: IconCoinRupee,
           items: [
             {
-              title: 'Team Finance',
+              title: 'Sponsorship Spend',
               url: '/401',
               icon: IconLock,
             },
             {
-              title: 'Sales',
+              title: 'Invoices',
               url: '/403',
               icon: IconReportMoney,
             },
-            // {
-            //   title: 'Not Found',
-            //   url: '/404',
-            //   icon: IconError404,
-            // },
-            // {
-            //   title: 'Internal Server Error',
-            //   url: '/500',
-            //   icon: IconServerOff,
-            // },
-            // {
-            //   title: 'Maintenance Error',
-            //   url: '/503',
-            //   icon: IconBarrierBlock,
-            // },
           ],
         },
       ],
@@ -193,3 +162,154 @@ export const sidebarData: SidebarData = {
     },
   ],
 }
+
+// ─── Organizer Sidebar ──────────────────────────────────────────
+const organizerSidebarData: SidebarData = {
+  user: {
+    name: 'MyTribe Organiser',
+    email: 'eventorganiser@gmail.com',
+    avatar: '/avatars/shadcn.jpg',
+  },
+  teams: [
+    {
+      name: 'My Event',
+      logo: Command,
+      plan: 'Organisation Name',
+    },
+    {
+      name: 'My Event 2',
+      logo: GalleryVerticalEnd,
+      plan: 'Organisation',
+    },
+    {
+      name: 'My Event 3',
+      logo: AudioWaveform,
+      plan: 'Organisation',
+    },
+  ],
+  navGroups: [
+    {
+      title: 'General',
+      items: [
+        {
+          title: 'Overview',
+          url: '/',
+          icon: IconLayoutDashboard,
+        },
+        {
+          title: 'Tasks of MOU',
+          url: '/tasks',
+          icon: IconChecklist,
+        },
+        {
+          title: 'MOU Listing',
+          url: '/mous',
+          icon: IconSignature,
+        },
+        {
+          title: 'Attendees',
+          url: '/attendees',
+          icon: IconUsers,
+        },
+        {
+          title: 'Chats',
+          url: '/chats',
+          badge: '3',
+          icon: IconMessages,
+        },
+      ],
+    },
+    {
+      title: 'Pages',
+      items: [
+        {
+          title: 'Analytics',
+          icon: IconChartPie3,
+          items: [
+            {
+              title: 'Organisation Analytics',
+              url: '/sign-in-2',
+            },
+            {
+              title: 'Team Analytics',
+              url: '/sign-in',
+            },
+            {
+              title: 'Social Reach',
+              url: '/sign-up',
+            },
+            {
+              title: 'Paid Advertisements',
+              url: '/forgot-password',
+            },
+          ],
+        },
+        {
+          title: 'Finance',
+          icon: IconCoinRupee,
+          items: [
+            {
+              title: 'Team Finance',
+              url: '/401',
+              icon: IconLock,
+            },
+            {
+              title: 'Sales',
+              url: '/403',
+              icon: IconReportMoney,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Other',
+      items: [
+        {
+          title: 'Settings',
+          icon: IconSettings,
+          items: [
+            {
+              title: 'Profile',
+              url: '/settings',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Account',
+              url: '/settings/account',
+              icon: IconTool,
+            },
+            {
+              title: 'Appearance',
+              url: '/settings/appearance',
+              icon: IconPalette,
+            },
+            {
+              title: 'Notifications',
+              url: '/settings/notifications',
+              icon: IconNotification,
+            },
+            {
+              title: 'Display',
+              url: '/settings/display',
+              icon: IconBrowserCheck,
+            },
+          ],
+        },
+        {
+          title: 'Help Center',
+          url: '/help-center',
+          icon: IconHelp,
+        },
+      ],
+    },
+  ],
+}
+
+// ─── Getter ─────────────────────────────────────────────────────
+export function getSidebarData(role: UserRole): SidebarData {
+  return role === 'sponsor' ? sponsorSidebarData : organizerSidebarData
+}
+
+// Keep default export for backward compatibility during migration
+export const sidebarData = organizerSidebarData
